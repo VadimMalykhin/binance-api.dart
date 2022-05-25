@@ -1,0 +1,2 @@
+/// WebSocket Client
+mixin WebSocketClient {}

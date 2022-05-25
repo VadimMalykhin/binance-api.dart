@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "dart.lineLength": 120,
+  "[dart]": {
+    "editor.rulers": [120]
+  },
+  "editor.wordWrapColumn": 120,
+  "editor.rulers": [120],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}
