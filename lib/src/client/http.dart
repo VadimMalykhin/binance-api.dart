@@ -65,7 +65,8 @@ mixin HttpClient {
           'X-MBX-APIKEY': credentials.apiKey,
         };
         uri = uri.withQueryParameters(
-            {'signature': createSignature(queryString: uri.query, apiSecret: credentials.apiSecret)});
+          {'signature': createSignature(queryString: uri.query, apiSecret: credentials.apiSecret)},
+        );
       }
 
       Response? response;
@@ -96,15 +97,17 @@ mixin HttpClient {
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
       } else {
-        throw BinanceApiBaseException('Status Code', response.statusCode ?? 0);
+        throw BinanceApiResponseException.fromJson(response.data);
       }
     } catch (e) {
       if (e is DioError) {
         if (e.response?.statusCode == 400) {
           throw BinanceApiResponseException.fromJson(e.response?.data);
         }
+      } else if (e is BinanceApiResponseException) {
+        throw BinanceApiResponseException(e.message, e.code);
       } else {
-        throw BinanceApiBaseException('Unknown', -10000);
+        throw BinanceApiBaseException('Unknown exception.', -10000);
       }
       rethrow;
     }
