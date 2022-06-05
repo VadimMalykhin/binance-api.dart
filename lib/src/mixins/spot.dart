@@ -148,6 +148,7 @@ mixin SpotMixin on HttpClient, CredentialsMixin {
         '/v1/account/apiRestrictions',
         Endpoint.sapi,
         credentials: getCredentials(),
+        addTimestamp: true,
       ));
 
   /// Daily Account Snapshot (USER_DATA)
