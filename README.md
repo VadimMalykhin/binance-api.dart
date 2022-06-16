@@ -12,4 +12,4 @@ dependencies:
 
 ## License
 
-[GPLv3](COPYING)
+[GPLv3](LICENSE)
