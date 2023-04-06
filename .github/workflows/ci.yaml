@@ -12,8 +12,7 @@ jobs:
     strategy:
       matrix:
         sdk: [stable, beta]
-        runs_on: [ubuntu-latest]
-    runs-on: ${{ matrix.runs_on }}
+    runs-on: self-hosted
     timeout-minutes: 5
     steps:
       - name: Checkout
