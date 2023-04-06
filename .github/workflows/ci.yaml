@@ -11,7 +11,7 @@ jobs:
     name: CI
     strategy:
       matrix:
-        sdk: [2.17.0, beta]
+        sdk: [stable, beta]
         runs_on: [ubuntu-latest, self-hosted]
     runs-on: ${{ matrix.runs_on }}
     timeout-minutes: 5
