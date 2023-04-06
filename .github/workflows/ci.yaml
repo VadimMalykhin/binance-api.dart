@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: CI
+    strategy:
+      matrix:
+        sdk: [2.17.0, beta]
+        runs_on: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.runs_on }}
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run tests
+        run: dart run test
