@@ -5,10 +5,10 @@ import 'package:dio/dio.dart';
 import '../exceptions/exceptions.dart';
 import '../extensions/uri.dart';
 import '../models/models.dart';
-import '../utils.dart';
+import '../utils/create_signature.dart';
 
-const int _kDefaultConnectTimeout = Duration.millisecondsPerMinute;
-const int _kDefaultReceiveTimeout = Duration.millisecondsPerMinute;
+const Duration _kDefaultConnectTimeout = Duration(milliseconds: Duration.millisecondsPerMinute);
+const Duration _kDefaultReceiveTimeout = Duration(milliseconds: Duration.millisecondsPerMinute);
 
 /// HTTP Client
 mixin HttpClient {
@@ -96,19 +96,16 @@ mixin HttpClient {
 
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
-      } else {
-        throw BinanceApiResponseException.fromJson(response.data);
       }
+
+      throw BinanceApiResponseException.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 400) {
+        throw BinanceApiResponseException.fromJson(e.response?.data);
+      }
+    } on BinanceApiResponseException catch (e) {
+      throw BinanceApiResponseException(e.message, e.code);
     } catch (e) {
-      if (e is DioError) {
-        if (e.response?.statusCode == 400) {
-          throw BinanceApiResponseException.fromJson(e.response?.data);
-        }
-      } else if (e is BinanceApiResponseException) {
-        throw BinanceApiResponseException(e.message, e.code);
-      } else {
-        throw BinanceApiBaseException('Unknown exception.', -10000);
-      }
       rethrow;
     }
   }
