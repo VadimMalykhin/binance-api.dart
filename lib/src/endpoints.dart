@@ -4,6 +4,7 @@ class Endpoint {
   static final Uri apiAlias1 = Uri(scheme: 'https', host: 'api1.binance.com', path: 'api');
   static final Uri apiAlias2 = Uri(scheme: 'https', host: 'api2.binance.com', path: 'api');
   static final Uri apiAlias3 = Uri(scheme: 'https', host: 'api3.binance.com', path: 'api');
+  static final Uri apiTestnet = Uri(scheme: 'https', host: 'testnet.binance.vision', path: 'api');
   static final Uri bapi = Uri(scheme: 'https', host: 'www.binance.com', path: 'bapi');
   static final Uri dapi = Uri(scheme: 'https', host: 'dapi.binance.com', path: 'dapi');
   static final Uri fapi = Uri(scheme: 'https', host: 'fapi.binance.com', path: 'fapi');
