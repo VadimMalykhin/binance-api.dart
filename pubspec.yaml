@@ -5,7 +5,7 @@ repository: https://github.com/VadimMalykhin/binance-api.dart
 publish_to: none
 
 environment:
-  sdk: ">=2.17.0 <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
   convert: ^3.1.1
